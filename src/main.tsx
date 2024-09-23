@@ -3,12 +3,13 @@ import App from "@/App.tsx";
 import "@/index.css";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import BaseLayout from "./components/layout/BaseLayout";
 
 const router = createBrowserRouter([
   {
     id: "root",
     path: "/",
-    element: <App />,
+    element: <BaseLayout />,
     // errorElement: <ErrorPage />,
     // loader: rootLoader,
     children: [
