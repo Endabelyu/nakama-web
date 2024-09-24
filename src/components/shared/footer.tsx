@@ -1,5 +1,4 @@
 import { Copyright } from "lucide-react";
-import React from "react";
 import { Separator } from "../ui/separator";
 import { Link } from "react-router-dom";
 

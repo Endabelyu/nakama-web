@@ -1,8 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader } from "../ui/card";
 import listProducts from "@/data/listProductData";
-import { Button } from "../ui/button";
-import { ShoppingCart } from "lucide-react";
 import { convertToIDR } from "@/lib/currency";
 
 export function ListProducts() {
