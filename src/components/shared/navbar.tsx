@@ -14,14 +14,11 @@ const Navbar = () => {
 
           <SearchInput />
           <span className='flex items-center gap-2'>
-            <Link to={"/"}>
+            <Link to={"/cart"}>
               <ShoppingCart className='h-6 w-6 text-listHat hover:fill-listHat ' />
             </Link>
             <span className='text-listHat'>|</span>
-            <Button
-              variant='outline'
-              className='flex items-center bg-listHat text-slate-50 gap-2'
-            >
+            <Button variant='outline' className='flex items-center  gap-2'>
               <LogIn className='h-4 w-4 ' />
               <p>Masuk</p>
             </Button>
@@ -30,10 +27,20 @@ const Navbar = () => {
         <div className='flex justify-center w-full mx-auto mt-0  '>
           <ul className='flex  items-center gap-4 text-listHat w-[65%] '>
             <li className='flex items-center gap-2 cursor-pointer'>
-              <p className='hover:underline'>Home</p>
+              <Link
+                to={"/"}
+                className='hover:underline text-listHat hover:text-listHat'
+              >
+                Home
+              </Link>
             </li>
-            <li className='flex items-center gap-2 cursor-pointer'>
-              <p className='hover:underline'>Store</p>
+            <li className='flex items-center gap-2 cursor-pointer '>
+              <Link
+                to={"/products"}
+                className='hover:underline text-listHat hover:text-listHat'
+              >
+                Products
+              </Link>
             </li>
           </ul>
         </div>
