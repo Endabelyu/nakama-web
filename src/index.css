@@ -79,4 +79,8 @@ button:focus-visible {
   .text-title-shadow {
     text-shadow: -1px 9px 7px rgba(169, 0, 0, 0.3);
   }
+
+  div > button[role="tab"]:hover {
+    border-color: transparent;
+  }
 }
