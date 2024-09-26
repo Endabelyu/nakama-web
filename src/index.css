@@ -74,7 +74,7 @@ button:focus-visible {
     width: 100%;
   }
   #root {
-    @apply w-screen bg-slate-50;
+    @apply w-screen bg-[#F0F3F7];
   }
   .text-title-shadow {
     text-shadow: -1px 9px 7px rgba(169, 0, 0, 0.3);
