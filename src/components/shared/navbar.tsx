@@ -1,7 +1,7 @@
 import SearchInput from "./search-input";
 import { LogIn, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const navigate = useNavigate();
