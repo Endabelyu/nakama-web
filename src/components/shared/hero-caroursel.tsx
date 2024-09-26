@@ -5,7 +5,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import imageNakamas from "@/data/heroCarouselData";
+import imageNakamas from "@/data/hero-carousel-data";
 
 const HeroCarousel = () => {
   return (

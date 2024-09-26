@@ -1,6 +1,16 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
-
-const TabDescription = ({ className }: { className: string }) => {
+export type DescriptionTabTypes = {
+  className: string;
+  description: string;
+  sku: string;
+  category: string;
+};
+const TabDescription = ({
+  className,
+  description,
+  sku,
+  category,
+}: DescriptionTabTypes) => {
   return (
     <Tabs defaultValue='description' className={` ${className} `}>
       <TabsList className='grid w-full grid-cols-2 border-b-2'>
@@ -11,13 +21,16 @@ const TabDescription = ({ className }: { className: string }) => {
       </TabsList>
       <TabsContent value='description'>
         <div>
-          <p>One Piece Necklaces – Straw Hat Pirates Members Metal Pendant</p>
-          <p>Necklace Lenght; 70cm Material: Metal</p>
+          <p>{description}</p>
         </div>
       </TabsContent>
       <TabsContent value='additional-information'>
         <div>
-          <p>SKU: 3256804829874475-09 Category: One Piece Necklaces</p>
+          <p>
+            SKU: {sku}
+            <br />
+            Category: {category}
+          </p>
         </div>
       </TabsContent>
     </Tabs>
