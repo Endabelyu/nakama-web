@@ -4,9 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { ScrollRestoration, useLoaderData } from "react-router-dom";
 import { loader } from "./home-loader";
 const HomeRoute = () => {
-  const { products, message, ok, pagination } = useLoaderData() as Awaited<
-    ReturnType<typeof loader>
-  >;
+  const { products } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
   return (
     <div className='min-h-screen flex flex-col gap-4 px-6 pt-4 pb-8'>
       <HeroCarousel />

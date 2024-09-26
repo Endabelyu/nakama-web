@@ -9,9 +9,7 @@ import { loader } from "./product-detail-loader";
 const ProductDetailRoute = () => {
   const location = useLocation();
   const paths = location.pathname.split("/").filter(Boolean);
-  const { products, message, ok } = useLoaderData() as Awaited<
-    ReturnType<typeof loader>
-  >;
+  const { products } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
   console.log(paths, "pathss");
 
   if (!products) {

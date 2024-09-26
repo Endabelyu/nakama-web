@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { Card, CardContent, CardHeader } from "../ui/card";
-import listProducts from "@/data/list-product-data";
 import { convertToIDR } from "@/lib/currency";
 import { ProductData } from "@/types";
 

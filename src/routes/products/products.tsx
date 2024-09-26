@@ -6,7 +6,7 @@ import SearchInput from "@/components/shared/search-input";
 import PaginationList from "@/components/shared/pagination-list";
 
 const ProductsRoute = () => {
-  const { products, message, ok, pagination } = useLoaderData() as Awaited<
+  const { products, pagination } = useLoaderData() as Awaited<
     ReturnType<typeof loader>
   >;
   return (
