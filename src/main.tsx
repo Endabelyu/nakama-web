@@ -4,9 +4,14 @@ import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomeRoute from "./routes/home/home";
 import ProductsRoute from "./routes/products/products";
-import ProductDetailRoute from "./routes/product-detail/productDetail";
+import ProductDetailRoute from "./routes/product-detail/product-detail";
 import CartRoute from "./routes/cart/cart";
-import BaseLayout from "./components/layout/baseLayout";
+import BaseLayout from "./components/layout/base-layout";
+import LoginRoute from "./routes/login/login";
+import RegisterRoute from "./routes/register/register";
+import { loader as HomeLoader } from "./routes/home/home-loader";
+import { loader as ProductLoader } from "./routes/product-detail/product-detail-loader";
+import { loader as ProductsLoader } from "./routes/products/products-loader";
 
 const router = createBrowserRouter([
   {
@@ -19,30 +24,30 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HomeRoute />,
-        // loader: homeLoader,
+        loader: HomeLoader,
       },
       {
         path: "/products",
         element: <ProductsRoute />,
-        // loader: productsLoader,
+        loader: ProductsLoader,
       },
       {
         path: "/products/:slug",
         element: <ProductDetailRoute />,
-        // loader: productsLoader,
+        loader: ProductLoader,
       },
-      // {
-      //   path: "/register",
-      //   element: <RegisterRoute />,
-      //   loader: registerLoader,
-      //   action: registerAction,
-      // },
-      // {
-      //   path: "/login",
-      //   element: <LoginRoute />,
-      //   loader: loginLoader,
-      //   action: loginAction,
-      // },
+      {
+        path: "/register",
+        element: <RegisterRoute />,
+        // loader: registerLoader,
+        // action: registerAction,
+      },
+      {
+        path: "/login",
+        element: <LoginRoute />,
+        // loader: loginLoader,
+        // action: loginAction,
+      },
       // {
       //   path: "/dashboard",
       //   element: <UserDashboardRoute />,

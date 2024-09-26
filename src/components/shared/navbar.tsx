@@ -1,9 +1,10 @@
-import SearchInput from "./searchInput";
+import SearchInput from "./search-input";
 import { LogIn, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
-import { Link } from "react-router-dom";
+import { Link, redirect, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   return (
     <div className='w-full sticky top-0 z-50 '>
       <nav className='flex flex-col gap-3 justify-between items-center bg-strawHat pt-6 pb-4 px-8 shadow-lg'>
@@ -12,13 +13,17 @@ const Navbar = () => {
             <h1 className='text-2xl font-semibold text-listHat '>Nakama's</h1>
           </Link>
 
-          <SearchInput />
+          <SearchInput className='w-[65%]' />
           <span className='flex items-center gap-2'>
             <Link to={"/cart"}>
               <ShoppingCart className='h-6 w-6 text-listHat hover:fill-listHat ' />
             </Link>
             <span className='text-listHat'>|</span>
-            <Button variant='outline' className='flex items-center  gap-2'>
+            <Button
+              variant='outline'
+              className='flex items-center  gap-2'
+              onClick={() => navigate("/login")}
+            >
               <LogIn className='h-4 w-4 ' />
               <p>Masuk</p>
             </Button>
