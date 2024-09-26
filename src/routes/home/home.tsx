@@ -1,8 +1,12 @@
-import HeroCarousel from "@/components/shared/heroCaroursel";
-import ListProducts from "@/components/shared/listProducts";
+import HeroCarousel from "@/components/shared/hero-caroursel";
+import ListProducts from "@/components/shared/list-products";
 import { Separator } from "@/components/ui/separator";
-import { ScrollRestoration } from "react-router-dom";
+import { ScrollRestoration, useLoaderData } from "react-router-dom";
+import { loader } from "./home-loader";
 const HomeRoute = () => {
+  const { products, message, ok, pagination } = useLoaderData() as Awaited<
+    ReturnType<typeof loader>
+  >;
   return (
     <div className='min-h-screen flex flex-col gap-4 px-6 pt-4 pb-8'>
       <HeroCarousel />
@@ -20,7 +24,7 @@ const HomeRoute = () => {
         <h3 className='font-bold text-4xl text-center  text-listHat '>
           Our Best Selling
         </h3>
-        <ListProducts />
+        <ListProducts products={products} />
       </section>
       <ScrollRestoration />
     </div>
