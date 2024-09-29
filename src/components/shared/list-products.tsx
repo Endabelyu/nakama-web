@@ -23,7 +23,7 @@ export function ListProducts({
             <Link to={`/products/${slug}`}>
               <Card className=''>
                 <CardHeader
-                  className={`${type === "products" ? "h-[50vh]" : "h-[70vh]"}`}
+                  className={`${type === "products" ? "h-[45vh]" : "h-[70vh]"}`}
                 >
                   <img
                     src={imageURL}
