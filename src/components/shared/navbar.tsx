@@ -7,30 +7,14 @@ const Navbar = () => {
   const navigate = useNavigate();
   return (
     <div className='w-full sticky top-0 z-50 '>
-      <nav className='flex flex-col gap-3 justify-between items-center bg-strawHat pt-6 pb-4 px-8 shadow-lg'>
+      <nav className='flex flex-col  justify-between items-center bg-strawHat pt-6 pb-4 px-8 shadow-lg'>
         <div className='flex justify-between items-center w-full'>
           <Link to={"/"}>
             <h1 className='text-2xl font-semibold text-listHat '>Nakama's</h1>
           </Link>
 
-          <SearchInput className='w-[65%]' />
-          <span className='flex items-center gap-2'>
-            <Link to={"/cart"}>
-              <ShoppingCart className='h-6 w-6 text-listHat hover:fill-listHat ' />
-            </Link>
-            <span className='text-listHat'>|</span>
-            <Button
-              variant='outline'
-              className='flex items-center  gap-2'
-              onClick={() => navigate("/login")}
-            >
-              <LogIn className='h-4 w-4 ' />
-              <p>Masuk</p>
-            </Button>
-          </span>
-        </div>
-        <div className='flex justify-center w-full mx-auto mt-0  '>
-          <ul className='flex  items-center gap-4 text-listHat w-[65%] '>
+          <ul className='flex  items-center gap-4 text-listHat self-center'>
+            
             <li className='flex items-center gap-2 cursor-pointer'>
               <Link
                 to={"/"}
@@ -48,7 +32,23 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+          <SearchInput className='w-[45%]' />
+          <span className='flex items-center gap-2'>
+            <Link to={"/cart"}>
+              <ShoppingCart className='h-6 w-6 text-listHat hover:fill-listHat ' />
+            </Link>
+            <span className='text-listHat'>|</span>
+            <Button
+              variant='outline'
+              className='flex items-center  gap-2'
+              onClick={() => navigate("/login")}
+            >
+              <LogIn className='h-4 w-4 ' />
+              <p>Masuk</p>
+            </Button>
+          </span>
         </div>
+        <div className='flex justify-center w-full mx-auto mt-0  '></div>
       </nav>
     </div>
   );
