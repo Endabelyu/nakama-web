@@ -7,7 +7,7 @@ export const loader = async ({ request }: { request: Request }) => {
     const page = searchParams.get("page") || 1;
     const q = searchParams.get("q") || "";
     const response = await fetch(
-      `${BACKEND_API_URL}/products?q=${q}&page=${page}&limit=1`,
+      `${BACKEND_API_URL}/products?q=${q}&page=${page}&limit=16`,
       {
         method: "GET",
         headers: { "Content-Type": "application/json" },
