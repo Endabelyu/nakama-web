@@ -21,7 +21,7 @@ export type ProductDetail = {
   data: ProductData;
 };
 export type paginationData = {
-  page: number;
+  currentPage: number;
   totalPages: number;
   total: number;
 };
