@@ -56,7 +56,7 @@ const PaginationLink = ({
         variant: isActive ? "outline" : "ghost",
         size,
       }),
-      "bg-transparent shadow-none text-listHat hover:text-listHat hover:scale-110 hover:bg-transparent",
+      "bg-transparent shadow-none text-listHat hover:text-listHat hover:scale-110 hover:bg-strawHat active:bg-strawHat",
       className,
     )}
     {...props}
@@ -72,7 +72,7 @@ const PaginationPrevious = ({
     aria-label='Go to previous page'
     size='default'
     className={cn(
-      "gap-1 pl-2.5 text-listHat hover:text-listHat hover:scale-110 hover:bg-transparent",
+      "cursor-pointer gap-1 pl-2.5 text-listHat hover:text-listHat hover:scale-110 hover:bg-transparent",
       className,
     )}
     {...props}
@@ -91,7 +91,7 @@ const PaginationNext = ({
     aria-label='Go to next page'
     size='default'
     className={cn(
-      "gap-1 pr-2.5 text-listHat hover:text-listHat hover:scale-110 hover:bg-transparent",
+      "cursor-pointer gap-1 pr-2.5 text-listHat hover:text-listHat hover:scale-110 hover:bg-transparent",
       className,
     )}
     {...props}
