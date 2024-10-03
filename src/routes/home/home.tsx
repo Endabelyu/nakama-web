@@ -1,7 +1,7 @@
 import HeroCarousel from "@/components/shared/hero-caroursel";
 import ListProducts from "@/components/shared/list-products";
 import { Separator } from "@/components/ui/separator";
-import { ScrollRestoration, useLoaderData } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { loader } from "./home-loader";
 const HomeRoute = () => {
   const { products } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
@@ -24,7 +24,6 @@ const HomeRoute = () => {
         </h3>
         <ListProducts products={products} />
       </section>
-      <ScrollRestoration />
     </div>
   );
 };
