@@ -14,7 +14,7 @@ const Breadcrumbs = () => {
       <BreadcrumbList>
         {breadcrumbItems.map((item, index) => (
           <>
-            <BreadcrumbItem key={index}>
+            <BreadcrumbItem key={`${index}-${item.path}`}>
               <BreadcrumbLink href={item.path} className='cursor-pointer'>
                 {item.label}
               </BreadcrumbLink>
