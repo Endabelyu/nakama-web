@@ -10,7 +10,6 @@ export const useBreadcrumbs = () => {
       index === paths.length - 1 ? formatLastSegment(path) : capitalize(path);
     return { label, path: routeTo };
   });
-  console.log([{ label: "Nakama's", path: "/" }, ...items], "testt");
   // Add the "Home" item at the beginning
   return [{ label: "Nakama's", path: "/" }, ...items];
 };

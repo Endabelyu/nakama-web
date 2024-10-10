@@ -4,12 +4,14 @@ export type DescriptionTabTypes = {
   description: string;
   sku: string;
   category: string;
+  stock: number;
 };
 const TabDescription = ({
   className,
   description,
   sku,
   category,
+  stock,
 }: DescriptionTabTypes) => {
   return (
     <Tabs defaultValue='description' className={` ${className} `}>
@@ -22,6 +24,8 @@ const TabDescription = ({
       <TabsContent value='description'>
         <div>
           <p>{description}</p>
+          <br />
+          <p> stock: {stock}</p>
         </div>
       </TabsContent>
       <TabsContent value='additional-information'>
