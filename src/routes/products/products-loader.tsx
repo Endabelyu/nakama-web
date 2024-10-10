@@ -1,7 +1,7 @@
 import { BACKEND_API_URL } from "@/lib/env";
 import { Product } from "@/types";
 
-export const loader = async ({ request }: { request: Request }) => {
+export const ProductsLoader = async ({ request }: { request: Request }) => {
   try {
     const searchParams = new URL(request.url).searchParams;
     const page = searchParams.get("page") || 1;

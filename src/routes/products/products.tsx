@@ -1,13 +1,13 @@
 import Breadcrumbs from "@/components/shared/breadcrumbs/breadcrumbs";
 import ListProducts from "@/components/shared/list-products";
-import { loader } from "./products-loader";
+import { ProductsLoader } from "./products-loader";
 import { useLoaderData } from "react-router-dom";
 import SearchInput from "@/components/shared/search-input";
 import PaginationList from "@/components/shared/pagination-list";
 
 const ProductsRoute = () => {
   const { products, pagination } = useLoaderData() as Awaited<
-    ReturnType<typeof loader>
+    ReturnType<typeof ProductsLoader>
   >;
 
   return (
@@ -33,7 +33,7 @@ const ProductsRoute = () => {
             </p>
             <PaginationList
               total={pagination.total}
-              currentPage={pagination.currentPage}
+              currentPage={Number(pagination.currentPage)}
               totalPages={pagination.totalPages}
             />
           </span>
