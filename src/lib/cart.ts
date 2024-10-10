@@ -6,7 +6,7 @@ import { auth } from "./auth";
 export type Cart = {
   getCart(): Promise<CartResponse | null>;
   deleteItemCart(id: string): Promise<cartSuccess | null>;
-  editQuantityItem(id: string, quantity: number): Promise<void | null>;
+  // editQuantityItem(id: string, quantity: number): Promise<void | null>;
 };
 
 export type cartSuccess = {

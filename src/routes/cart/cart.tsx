@@ -7,9 +7,10 @@ import { cartLoader } from "./cart-loader";
 import { Form, redirect, useLoaderData } from "react-router-dom";
 import { CartItem, CartResponse } from "@/types";
 import { Trash2Icon } from "lucide-react";
-import { cart, cartSuccess } from "@/lib/cart";
+import { cart } from "@/lib/cart";
 import { auth } from "@/lib/auth";
-import { BACKEND_API_URL } from "@/lib/env";
+// import { auth } from "@/lib/auth";
+// import { BACKEND_API_URL } from "@/lib/env";
 
 const CartRoute = () => {
   const cartData = useLoaderData() as Awaited<ReturnType<typeof cartLoader>>;
@@ -45,14 +46,13 @@ const CartRoute = () => {
   //   if (!response.ok) return null;
   // }
   async function deleteItemCart() {
-    const token =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjbTF0ZXVob2MwMDA0c3kybHkxZXpkYjJtIiwiZXhwIjoxNzI4NTc5NzAxLCJpYXQiOjE3Mjg0OTMzMDF9.OrE_z3yVGj-BCzw0-UtKvxj0nyrsfS22Sidzmufoc4c";
+    const token = auth.getToken();
 
     const addToCartData = {
       quantity: 1,
     };
     const response = await fetch(
-      `https://nakama-api.endabelyu.store/carts/items/cm22oo9hy000fv29h1ey3yauf`,
+      `https://nakama-api.endabelyu.store/carts/items/cm22vlx2n000lv29h1k8qcnh5`,
       {
         method: "PATCH",
         headers: {
@@ -67,6 +67,7 @@ const CartRoute = () => {
     if (!response.ok) return null;
     return null;
   }
+  deleteItemCart();
   return (
     <main className=' px-8 mt-6 mb-12 flex flex-col gap-4'>
       <Breadcrumbs />
@@ -97,18 +98,16 @@ const CartRoute = () => {
                           <p className='text-end text-listHat  font-bold'>
                             {convertToIDR(item.product.price)}
                           </p>
-                          <Form method='post' className='flex gap-4'>
+                          <Form method='patch' className='flex gap-4'>
                             <Button
                               variant={"outline"}
                               type='submit'
                               className=' bg-transparent shadow-none hover:bg-transparent   hover:border-transparent '
-                              onClick={() => deleteItemCart()}
+                              onClick={() => handdleClick(item.id)}
                             >
                               <Trash2Icon className='h-8 w-8 text-listHat hover:fill-listHat ' />
                             </Button>
-                          </Form>
 
-                          <Form method='patch' className='flex gap-4'>
                             <Input
                               type='number'
                               className=' w-20 h-8 text-center self-center  '
