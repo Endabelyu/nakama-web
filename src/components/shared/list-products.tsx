@@ -10,7 +10,6 @@ export function ListProducts({
   products: ProductData[];
   type?: string;
 }) {
-  console.log(type, type === "products", "type");
   return (
     <ul
       className={`grid  ${
@@ -21,9 +20,9 @@ export function ListProducts({
         products.map(({ id, slug, imageURL, name, price }) => (
           <li key={id}>
             <Link to={`/products/${slug}`}>
-              <Card className=''>
+              <Card className={`${type === "products" ? "h-[65vh]" : ""}`}>
                 <CardHeader
-                  className={`${type === "products" ? "h-[45vh]" : "h-[70vh]"}`}
+                  className={`${type === "products" ? "" : "h-[70vh]"}`}
                 >
                   <img
                     src={imageURL}
