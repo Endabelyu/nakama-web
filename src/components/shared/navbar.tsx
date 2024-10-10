@@ -1,10 +1,17 @@
-import SearchInput from "./search-input";
 import { LogIn, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
 import { Link, useNavigate } from "react-router-dom";
+// import { SearchCommand } from "./search-command";
+import { User } from "@/types";
+import { auth } from "@/lib/auth";
 
-const Navbar = () => {
+const Navbar = ({ user }: { user?: User | null }) => {
   const navigate = useNavigate();
+  function handleLogout() {
+    auth.logout();
+    console.log(user, "user");
+    window.location.href = "/login";
+  }
   return (
     <div className='w-full sticky top-0 z-50 '>
       <nav className='flex flex-col  justify-between items-center bg-strawHat pt-6 pb-4 px-8 shadow-lg'>
@@ -14,7 +21,6 @@ const Navbar = () => {
           </Link>
 
           <ul className='flex  items-center gap-4 text-listHat self-center'>
-            
             <li className='flex items-center gap-2 cursor-pointer'>
               <Link
                 to={"/"}
@@ -32,20 +38,33 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
-          <SearchInput className='w-[45%]' />
+          {/* <SearchInput className='w-[45%]' /> */}
+          {/* <SearchCommand listSearchItems={listSearchItems} query={query} /> */}
           <span className='flex items-center gap-2'>
             <Link to={"/cart"}>
               <ShoppingCart className='h-6 w-6 text-listHat hover:fill-listHat ' />
             </Link>
             <span className='text-listHat'>|</span>
-            <Button
-              variant='outline'
-              className='flex items-center  gap-2'
-              onClick={() => navigate("/login")}
-            >
-              <LogIn className='h-4 w-4 ' />
-              <p>Masuk</p>
-            </Button>
+
+            {user ? (
+              <Button
+                variant='outline'
+                className='flex items-center  gap-2'
+                onClick={handleLogout}
+              >
+                {/* <LogOut className='h-4 w-4 ' /> */}
+                <p>Logout</p>
+              </Button>
+            ) : (
+              <Button
+                variant='outline'
+                className='flex items-center  gap-2'
+                onClick={() => navigate("/login")}
+              >
+                <LogIn className='h-4 w-4 ' />
+                <p>Login</p>
+              </Button>
+            )}
           </span>
         </div>
         <div className='flex justify-center w-full mx-auto mt-0  '></div>
