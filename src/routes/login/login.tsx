@@ -1,9 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { LoaderIcon } from "lucide-react";
+import { Form, Link, useNavigation } from "react-router-dom";
 
 const LoginRoute = () => {
+  const navigation = useNavigation();
   return (
     <main className='px-8 flex justify-center items-center min-h-screen  gap-4'>
       <Card className='flex flex-col justify-between w-5/12  p-8 shadow-none bg-white hover:shadow-none hover:border-none -mt-20'>
@@ -18,16 +20,17 @@ const LoginRoute = () => {
             Register
           </Link>{" "}
         </span>
-        <form
-          action=''
-          method='post'
-          className=' flex flex-col gap-3 justify-between'
-        >
+        <Form method='post' className=' flex flex-col gap-3 justify-between'>
           <span>
             <label htmlFor='email' className='mb-0 text-sm font-medium'>
               Email
             </label>
-            <Input id='email' type='email' placeholder='Enter your email' />
+            <Input
+              id='email'
+              name='email'
+              type='email'
+              placeholder='Enter your email'
+            />
           </span>
           <span>
             <label htmlFor='password' className='mb-0 text-sm font-medium'>
@@ -36,6 +39,7 @@ const LoginRoute = () => {
             <Input
               type='password'
               id='password'
+              name='password'
               placeholder='Enter your password'
             />
           </span>
@@ -43,10 +47,15 @@ const LoginRoute = () => {
           <Button
             variant={"outline"}
             className='w-full h-12 bg-listHat text-slate-50  hover:bg-transparent mt-4'
+            type='submit'
           >
-            Login
+            {navigation.state === "loading" ? (
+              <LoaderIcon className='animate-spin h-5 w-5' />
+            ) : (
+              "Login"
+            )}
           </Button>
-        </form>
+        </Form>
       </Card>
     </main>
   );
