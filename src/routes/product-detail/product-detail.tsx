@@ -3,14 +3,13 @@ import TabDescription from "@/components/shared/tab-description";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { convertToIDR } from "@/lib/currency";
-import { useLoaderData, useLocation } from "react-router-dom";
-import { loader } from "./product-detail-loader";
+import { Form, useLoaderData } from "react-router-dom";
+import { ProductLoader } from "./product-detail-loader";
 
 const ProductDetailRoute = () => {
-  const location = useLocation();
-  const paths = location.pathname.split("/").filter(Boolean);
-  const { products } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
-  console.log(paths, "pathss");
+  const { products } = useLoaderData() as Awaited<
+    ReturnType<typeof ProductLoader>
+  >;
 
   if (!products) {
     return <p>Product not found.</p>;
@@ -30,22 +29,33 @@ const ProductDetailRoute = () => {
             description={products.description}
             sku={products.sku}
             category={products.category}
+            stock={products.stock}
           />
           <div className='flex gap-2'>
-            <span className='flex gap-4'>
-              <Input
-                type='number'
-                placeholder='1'
-                className='text-2xl w-20 h-16 text-center '
-                min={1}
+            <Form method='post' className=' w-full'>
+              <input
+                type='hidden'
+                name='productId'
+                defaultValue={products.id}
               />
-            </span>
-            <Button
-              variant='outline'
-              className='w-3/4 h-16 hover:bg-transparent'
-            >
-              <span>Add to Cart</span>
-            </Button>
+              <span className='flex gap-4 '>
+                <Input
+                  type='number'
+                  className='text-2xl w-20 h-16 text-center '
+                  name='quantity'
+                  defaultValue={1}
+                  min={1}
+                  max={products.stock}
+                />
+                <Button
+                  variant='outline'
+                  type='submit'
+                  className='w-full h-16 hover:bg-transparent'
+                >
+                  <span>Add to Cart</span>
+                </Button>
+              </span>
+            </Form>
           </div>
         </div>
       </section>

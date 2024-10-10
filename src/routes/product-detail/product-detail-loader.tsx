@@ -2,7 +2,7 @@ import { BACKEND_API_URL } from "@/lib/env";
 import {  ProductDetail } from "@/types";
 import { LoaderFunctionArgs } from "react-router-dom";
 
-export const loader = async ({ params }: LoaderFunctionArgs) => {
+export const ProductLoader = async ({ params }: LoaderFunctionArgs) => {
   const { slug } = params;
 
   try {

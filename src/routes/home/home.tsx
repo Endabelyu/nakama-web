@@ -2,14 +2,16 @@ import HeroCarousel from "@/components/shared/hero-caroursel";
 import ListProducts from "@/components/shared/list-products";
 import { Separator } from "@/components/ui/separator";
 import { useLoaderData } from "react-router-dom";
-import { loader } from "./home-loader";
+import { HomeLoader } from "./home-loader";
 const HomeRoute = () => {
-  const { products } = useLoaderData() as Awaited<ReturnType<typeof loader>>;
+  const { products } = useLoaderData() as Awaited<
+    ReturnType<typeof HomeLoader>
+  >;
   return (
     <div className='min-h-screen flex flex-col gap-4 px-6 pt-4 pb-8'>
       <HeroCarousel />
       <div className='flex flex-col gap-4 justify-center items-center'>
-        <h2 className='font-bold text-4xl text-title-shadow text-listHat'>
+        <h2 className='font-bold text-4xl text-listHat'>
           One Piece Premium Merch
         </h2>
         <p>

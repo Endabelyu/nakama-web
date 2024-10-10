@@ -1,7 +1,7 @@
 import { BACKEND_API_URL } from "@/lib/env";
 import { Product } from "@/types";
 
-export const loader = async () => {
+export const HomeLoader = async () => {
   try {
     const response = await fetch(`${BACKEND_API_URL}/products?page=1&limit=3`, {
       method: "GET",
