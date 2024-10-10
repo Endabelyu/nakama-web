@@ -9,42 +9,13 @@ import { CartItem, CartResponse } from "@/types";
 import { Trash2Icon } from "lucide-react";
 import { cart } from "@/lib/cart";
 import { auth } from "@/lib/auth";
-// import { auth } from "@/lib/auth";
-// import { BACKEND_API_URL } from "@/lib/env";
+import { BACKEND_API_URL } from "@/lib/env";
 
 const CartRoute = () => {
   const cartData = useLoaderData() as Awaited<ReturnType<typeof cartLoader>>;
 
   const { data, totalItem, totalPrice } = cartData as CartResponse;
 
-  async function handdleClick(id: string) {
-    const deleteItems = await cart.deleteItemCart(id);
-
-    if (deleteItems && !deleteItems.ok) {
-      console.log("delete unsuccessfull");
-    }
-
-    return redirect("/cart");
-  }
-
-  // async function handleChangeQuantity(id: string, quantity: number) {
-  //   // const updateItems = await cart.editQuantityItem(id, quantity);
-  //   const token = auth.getToken();
-  //   if (token) redirect("/login");
-  //   const response = await fetch(`${BACKEND_API_URL}/carts/items/${id}`, {
-  //     method: "PATCH",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       Authorization: `Bearer ${token}`,
-  //     },
-  //     body: JSON.stringify({ quantity }),
-  //     credentials: "include",
-  //   });
-  //   const deleteItem = (await response.json()) as cartSuccess;
-  //   console.log(deleteItem, "test");
-
-  //   if (!response.ok) return null;
-  // }
   async function deleteItemCart() {
     const token = auth.getToken();
 
@@ -52,7 +23,7 @@ const CartRoute = () => {
       quantity: 1,
     };
     const response = await fetch(
-      `https://nakama-api.endabelyu.store/carts/items/cm22vlx2n000lv29h1k8qcnh5`,
+      `${BACKEND_API_URL}/carts/items/cm22vlx2n000lv29h1k8qcnh5`,
       {
         method: "PATCH",
         headers: {
@@ -98,31 +69,59 @@ const CartRoute = () => {
                           <p className='text-end text-listHat  font-bold'>
                             {convertToIDR(item.product.price)}
                           </p>
-                          <Form method='patch' className='flex gap-4'>
-                            <Button
-                              variant={"outline"}
-                              type='submit'
-                              className=' bg-transparent shadow-none hover:bg-transparent   hover:border-transparent '
-                              onClick={() => handdleClick(item.id)}
-                            >
-                              <Trash2Icon className='h-8 w-8 text-listHat hover:fill-listHat ' />
-                            </Button>
-
-                            <Input
-                              type='number'
-                              className=' w-20 h-8 text-center self-center  '
-                              name='quantity'
-                              defaultValue={item.quantity}
-                              min={1}
-                              max={item.product.stock}
-                              onChange={
-                                () =>
-                                  // setTimeout(() => {
-                                  deleteItemCart()
-                                // }, 500);
-                              }
-                            />
-                          </Form>
+                          <div className='flex gap-4'>
+                            <Form method='post' className=''>
+                              <input
+                                type='hidden'
+                                name='action'
+                                value='delete'
+                              />
+                              <input
+                                type='hidden'
+                                name='itemId'
+                                value={item.id}
+                              />{" "}
+                              <Button
+                                variant={"outline"}
+                                type='submit'
+                                className=' bg-transparent shadow-none hover:bg-transparent   hover:border-transparent '
+                              >
+                                <Trash2Icon className='h-8 w-8 text-listHat hover:fill-listHat ' />
+                              </Button>
+                            </Form>
+                            <Form method='post' className=''>
+                              <input
+                                type='hidden'
+                                name='action'
+                                value='update'
+                              />
+                              <input
+                                type='hidden'
+                                name='itemId'
+                                value={item.id}
+                              />{" "}
+                              <Input
+                                type='number'
+                                className=' w-20 h-8 text-center self-center  '
+                                name='quantity'
+                                defaultValue={item.quantity}
+                                min={1}
+                                max={item.product.stock}
+                                onChange={(e) => {
+                                  // Automatically submit the form on change
+                                  e.target.form!.requestSubmit();
+                                }}
+                              />
+                              <input
+                                type='hidden'
+                                name='method'
+                                value='PATCH'
+                              />
+                              <Button type='submit' className='hidden'>
+                                Update
+                              </Button>
+                            </Form>
+                          </div>
                         </span>
                       </div>
                     </li>
@@ -138,9 +137,17 @@ const CartRoute = () => {
           <p className='text-2xl text-listHat  font-bold'>
             {convertToIDR(Number(totalPrice))}
           </p>
-          <Button variant={"outline"} className='hover:bg-transparent'>
-            Buy ({totalItem})
-          </Button>
+          <form method='post'>
+            <input type='hidden' name='action' value='checkout' />
+            <input type='hidden' name='dataChekcout' value={[]} />
+            <Button
+              variant={"outline"}
+              className='hover:bg-transparent'
+              type='submit'
+            >
+              Buy ({totalItem})
+            </Button>
+          </form>
         </div>
       </section>
     </main>
