@@ -6,12 +6,20 @@ import HomeRoute from "./routes/home/home";
 import ProductsRoute from "./routes/products/products";
 import ProductDetailRoute from "./routes/product-detail/product-detail";
 import CartRoute from "./routes/cart/cart";
-import BaseLayout from "./components/layout/base-layout";
+import BaseLayout from "./routes/root/base-layout";
 import LoginRoute from "./routes/login/login";
 import RegisterRoute from "./routes/register/register";
-import { loader as HomeLoader } from "./routes/home/home-loader";
-import { loader as ProductLoader } from "./routes/product-detail/product-detail-loader";
-import { loader as ProductsLoader } from "./routes/products/products-loader";
+import { HomeLoader } from "./routes/home/home-loader";
+import { ProductLoader } from "./routes/product-detail/product-detail-loader";
+import { ProductsLoader } from "./routes/products/products-loader";
+import { RootLoader } from "./routes/root/root-loader";
+import { loginAction } from "./routes/login/login-action";
+import { loginLoader } from "./routes/login/login-loader";
+import { registerLoader } from "./routes/register/register-loader";
+import { cartLoader } from "./routes/cart/cart-loader";
+import { registerAction } from "./routes/register/register-action";
+import { productDetailAction } from "./routes/product-detail/product-detail-action";
+import { cartAction } from "./routes/cart/cart-action";
 
 const router = createBrowserRouter([
   {
@@ -19,7 +27,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <BaseLayout />,
     // errorElement: <ErrorPage />,
-    // loader: rootLoader,
+    loader: RootLoader,
     children: [
       {
         path: "/",
@@ -35,18 +43,19 @@ const router = createBrowserRouter([
         path: "/products/:slug",
         element: <ProductDetailRoute />,
         loader: ProductLoader,
+        action: productDetailAction,
       },
       {
         path: "/register",
         element: <RegisterRoute />,
-        // loader: registerLoader,
-        // action: registerAction,
+        loader: registerLoader,
+        action: registerAction,
       },
       {
         path: "/login",
         element: <LoginRoute />,
-        // loader: loginLoader,
-        // action: loginAction,
+        loader: loginLoader,
+        action: loginAction,
       },
       // {
       //   path: "/dashboard",
@@ -57,7 +66,8 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <CartRoute />,
-        // loader: cartLoader,
+        loader: cartLoader,
+        action: cartAction,
       },
     ],
   },
