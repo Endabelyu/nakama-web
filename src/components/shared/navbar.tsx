@@ -8,7 +8,6 @@ import { getAvatarURL } from "@/lib/avatar";
 const Navbar = ({ user }: { user?: User | null }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location, "location");
   return (
     <div className='w-full sticky top-0 z-50 '>
       <nav className='flex flex-col  justify-between items-center bg-strawHat pt-6 pb-4 px-8 shadow-lg'>
