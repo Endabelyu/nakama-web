@@ -1,17 +1,14 @@
 import { LogIn, ShoppingCart } from "lucide-react";
 import { Button } from "../ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 // import { SearchCommand } from "./search-command";
 import { User } from "@/types";
-import { auth } from "@/lib/auth";
+import { getAvatarURL } from "@/lib/avatar";
 
 const Navbar = ({ user }: { user?: User | null }) => {
   const navigate = useNavigate();
-  function handleLogout() {
-    auth.logout();
-    console.log(user, "user");
-    window.location.href = "/login";
-  }
+  const location = useLocation();
+  console.log(location, "location");
   return (
     <div className='w-full sticky top-0 z-50 '>
       <nav className='flex flex-col  justify-between items-center bg-strawHat pt-6 pb-4 px-8 shadow-lg'>
@@ -44,26 +41,31 @@ const Navbar = ({ user }: { user?: User | null }) => {
             <Link to={"/cart"}>
               <ShoppingCart className='h-6 w-6 text-listHat hover:fill-listHat ' />
             </Link>
-            <span className='text-listHat'>|</span>
+            {!location.pathname.includes("/login") && (
+              <span className='text-listHat'>|</span>
+            )}
 
             {user ? (
-              <Button
-                variant='outline'
-                className='flex items-center  gap-2'
-                onClick={handleLogout}
-              >
-                {/* <LogOut className='h-4 w-4 ' /> */}
-                <p>Logout</p>
-              </Button>
+              <Link to='/profile'>
+                <img
+                  src={getAvatarURL(user.name)}
+                  alt={user.id}
+                  className='size-8 rounded-full'
+                />
+              </Link>
             ) : (
-              <Button
-                variant='outline'
-                className='flex items-center  gap-2'
-                onClick={() => navigate("/login")}
-              >
-                <LogIn className='h-4 w-4 ' />
-                <p>Login</p>
-              </Button>
+              <>
+                {!location.pathname.includes("/login") && (
+                  <Button
+                    variant='outline'
+                    className='flex items-center  gap-2'
+                    onClick={() => navigate("/login")}
+                  >
+                    <LogIn className='h-4 w-4 ' />
+                    <p>Login</p>
+                  </Button>
+                )}
+              </>
             )}
           </span>
         </div>
