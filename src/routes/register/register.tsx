@@ -8,7 +8,6 @@ import { ActionData } from "../login/login-action";
 const RegisterRoute = () => {
   const navigation = useNavigation();
   const actionData = useActionData() as ActionData;
-  console.log(actionData, "actionData");
   return (
     <main className='px-8 flex justify-center items-center min-h-screen gap-4'>
       <Card className='flex flex-col justify-between w-5/12 my-8   p-8 shadow-none bg-white hover:shadow-none hover:border-none'>

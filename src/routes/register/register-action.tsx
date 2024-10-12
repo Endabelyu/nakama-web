@@ -17,7 +17,6 @@ export const registerAction = async ({ request }: ActionFunctionArgs) => {
   const validationResult = UserRegisterSchema.safeParse(userRegister);
 
   if (!validationResult.success) {
-    // Collect and return errors to the form page
     const errors = validationResult.error.errors.reduce(
       (acc, error) => ({
         ...acc,
