@@ -47,9 +47,7 @@ export async function cartAction({ request }: ActionFunctionArgs) {
   } else if (action === "selectAll") {
     // Handle select all
     const cartId = formData.get("cartId");
-    const allItems = JSON.parse(formData.get("allItems") as string);
     const allSelected = JSON.parse(formData.get("allSelected") as string);
-    const arrayStringItems = allItems.map((item: CartItem) => item.id);
     const response = await fetch(
       `${BACKEND_API_URL}/carts/items/selected/${cartId}`,
       {
@@ -58,7 +56,7 @@ export async function cartAction({ request }: ActionFunctionArgs) {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ payload: allSelected ? arrayStringItems : [] }),
+        body: JSON.stringify({ selected: allSelected }),
       },
     );
 
@@ -68,16 +66,16 @@ export async function cartAction({ request }: ActionFunctionArgs) {
     }
   } else if (action === "selectItem") {
     const itemId = formData.get("itemId");
-    const cartId = formData.get("cartId");
+    const selectedItems = JSON.parse(formData.get("selectedItems") as string);
     const response = await fetch(
-      `${BACKEND_API_URL}/carts/items/selected/${cartId}`,
+      `${BACKEND_API_URL}/carts/items/selected/${itemId}`,
       {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ payload: [itemId] }),
+        body: JSON.stringify({ selected: selectedItems }),
       },
     );
 
