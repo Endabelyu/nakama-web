@@ -2,10 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { LoaderIcon } from "lucide-react";
-import { Form, Link, useNavigation } from "react-router-dom";
+import { Form, Link, useActionData, useNavigation } from "react-router-dom";
+import { ActionData } from "./login-action";
 
 const LoginRoute = () => {
   const navigation = useNavigation();
+  // No type argument for useActionData
+  const actionData = useActionData() as ActionData;
+  console.log(actionData, "actionData");
+  // Safely cast the actionData to the expected structure if needed
   return (
     <main className='px-8 flex justify-center items-center min-h-screen  gap-4'>
       <Card className='flex flex-col justify-between w-5/12  p-8 shadow-none bg-white hover:shadow-none hover:border-none -mt-20'>
@@ -31,6 +36,9 @@ const LoginRoute = () => {
               type='email'
               placeholder='Enter your email'
             />
+            {actionData?.errors?.email && (
+              <p style={{ color: "red" }}>{actionData.errors.email}</p>
+            )}
           </span>
           <span>
             <label htmlFor='password' className='mb-0 text-sm font-medium'>
@@ -42,6 +50,9 @@ const LoginRoute = () => {
               name='password'
               placeholder='Enter your password'
             />
+            {actionData?.errors?.password && (
+              <p style={{ color: "red" }}>{actionData.errors.password}</p>
+            )}
           </span>
 
           <Button
