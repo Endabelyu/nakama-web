@@ -3,14 +3,15 @@ import TabDescription from "@/components/shared/tab-description";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { convertToIDR } from "@/lib/currency";
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, useLoaderData, useNavigation } from "react-router-dom";
 import { ProductLoader } from "./product-detail-loader";
+import { LoaderIcon } from "lucide-react";
 
 const ProductDetailRoute = () => {
   const { products } = useLoaderData() as Awaited<
     ReturnType<typeof ProductLoader>
   >;
-
+  const navigation = useNavigation();
   if (!products) {
     return <p>Product not found.</p>;
   }
@@ -52,7 +53,11 @@ const ProductDetailRoute = () => {
                   type='submit'
                   className='w-full h-16 hover:bg-transparent'
                 >
-                  <span>Add to Cart</span>
+                  {navigation.state === "loading" ? (
+                    <LoaderIcon className='animate-spin h-5 w-5' />
+                  ) : (
+                    <span>Add to Cart</span>
+                  )}
                 </Button>
               </span>
             </Form>

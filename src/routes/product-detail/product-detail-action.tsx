@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import { BACKEND_API_URL } from "@/lib/env";
+import { Toast } from "@/lib/toast";
 import { CartResponse } from "@/types";
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 
@@ -25,7 +26,17 @@ export async function productDetailAction({ request }: ActionFunctionArgs) {
 
   const addToCartResponse: CartResponse = await response.json();
 
-  if (!addToCartResponse.ok) return null;
+  if (!addToCartResponse.ok) {
+    Toast.fire({
+      icon: "error",
+      title: "Add product to cart failed",
+    });
+    return null;
+  }
+  Toast.fire({
+    icon: "success",
+    title: "Add product to cart successfully",
+  });
   if (!addToCartResponse) return null;
   return redirect("/cart");
 }
