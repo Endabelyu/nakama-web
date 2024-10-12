@@ -23,10 +23,10 @@ const CheckoutRoute = () => {
       <section className='carts flex flex-col gap-6 w-full relative '>
         <div className='address  bg-white rounded-md shadow-md w-3/4 p-4'>
           <h2 className='font-bold text-slate-500'>Address</h2>
-          {/* <p className=' '>{user.address || "No Address"}</p> */}
-          <p className=' mt-4'>
+          <p className=' '>{user.address || "No Address"}</p>
+          {/* <p className=' mt-4'>
             {"deket masjid baiturrahman, Pasarkemis, Kab. Tangerang, Banten"}
-          </p>
+          </p> */}
         </div>{" "}
         <div className='flex flex-col gap-8 carts-item bg-white rounded-md shadow-md w-3/4 p-4'>
           {selectedItems.length > 0 ? (
