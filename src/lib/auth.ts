@@ -2,6 +2,8 @@ import { User } from "@/types";
 import { BACKEND_API_URL } from "./env";
 import { UserLogin, UserRegister } from "@/schemas/user";
 import { accessToken } from "./access-token";
+import { Toast } from "./toast";
+import { redirect } from "react-router-dom";
 
 export type Auth = {
   isAuthenticated: boolean;
@@ -32,8 +34,20 @@ export const auth: Auth = {
     });
 
     const user = await response.json();
-    if (!user) return null;
 
+    if (!user.ok) {
+      Toast.fire({
+        icon: "error",
+        title: "Register failed",
+      });
+      return null;
+    }
+    Toast.fire({
+      icon: "success",
+      title: "Register successfully",
+    });
+    if (!user) return null;
+    redirect("/login");
     return user;
   },
 
@@ -45,11 +59,22 @@ export const auth: Auth = {
         headers: { "Content-Type": "application/json" },
       });
 
-      const data: { token?: string; user?: User } = await response.json();
+      const data: { token?: string; user?: User; ok: boolean } =
+        await response.json();
+      if (!data.ok) {
+        Toast.fire({
+          icon: "error",
+          title: "Login failed",
+        });
+        return null;
+      }
+      Toast.fire({
+        icon: "success",
+        title: "Login successfully",
+      });
       if (!data.token) return null;
 
       accessToken.set(data.token);
-      auth.isAuthenticated = true;
     } catch (error: unknown) {
       console.error(error, "error");
       accessToken.remove();
