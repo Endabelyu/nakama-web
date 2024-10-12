@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import { BACKEND_API_URL } from "@/lib/env";
+import { Toast } from "@/lib/toast";
 import { CartItem } from "@/types";
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 
@@ -20,8 +21,16 @@ export async function cartAction({ request }: ActionFunctionArgs) {
       },
     });
     if (!response.ok) {
+      Toast.fire({
+        icon: "error",
+        title: "Delete product from cart failed",
+      });
       console.error("Delete unsuccessful");
     }
+    Toast.fire({
+      icon: "success",
+      title: "Delete product from cart successfully",
+    });
   } else if (action === "update") {
     const quantity = Number(formData.get("quantity"));
     const response = await fetch(`${BACKEND_API_URL}/carts/items/${itemId}`, {

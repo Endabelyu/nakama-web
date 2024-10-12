@@ -30,6 +30,7 @@ import { OrderLoader } from "./routes/order/order-loader";
 import OrderDetailRoute from "./routes/order/order-detail";
 import { OrderDetailLoader } from "./routes/order-detail/order-detail-loader";
 import { profileAction } from "./routes/profile/profile-action";
+import OrderSuccessRoute from "./routes/order/order-scucess";
 
 const router = createBrowserRouter([
   {
@@ -94,6 +95,10 @@ const router = createBrowserRouter([
         path: "/order/:orderId",
         element: <OrderDetailRoute />,
         loader: OrderDetailLoader,
+      },
+      {
+        path: "/order/success",
+        element: <OrderSuccessRoute />,
       },
     ],
   },

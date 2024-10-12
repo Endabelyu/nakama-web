@@ -66,6 +66,11 @@ const CheckoutRoute = () => {
           </p>
           <Form method='post'>
             <input type='hidden' name='action' value='checkout' />
+            <input
+              type='hidden'
+              name='cartId'
+              value={selectedItems[0].cartId}
+            />
 
             <Button
               variant={"outline"}
