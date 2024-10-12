@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth";
 import { BACKEND_API_URL } from "@/lib/env";
+import { CartItem } from "@/types";
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 
 export async function cartAction({ request }: ActionFunctionArgs) {
@@ -23,9 +24,8 @@ export async function cartAction({ request }: ActionFunctionArgs) {
     }
   } else if (action === "update") {
     const quantity = Number(formData.get("quantity"));
-    const methods = formData.get("method") as string;
     const response = await fetch(`${BACKEND_API_URL}/carts/items/${itemId}`, {
-      method: methods,
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
@@ -35,9 +35,62 @@ export async function cartAction({ request }: ActionFunctionArgs) {
     if (!response.ok) {
       console.error("Update unsuccessful");
     }
+  } else if (action === "selectAll") {
+    // Handle select all
+    const cartId = formData.get("cartId");
+    const allItems = JSON.parse(formData.get("allItems") as string);
+    const allSelected = JSON.parse(formData.get("allSelected") as string);
+    const arrayStringItems = allItems.map((item: CartItem) => item.id);
+    const response = await fetch(
+      `${BACKEND_API_URL}/carts/items/selected/${cartId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ payload: allSelected ? arrayStringItems : [] }),
+      },
+    );
+
+    const result = await response.json();
+    if (!result.ok) {
+      console.error("Select all unsuccessful");
+    }
+  } else if (action === "selectItem") {
+    const itemId = formData.get("itemId");
+    const cartId = formData.get("cartId");
+    const response = await fetch(
+      `${BACKEND_API_URL}/carts/items/selected/${cartId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ payload: [itemId] }),
+      },
+    );
+
+    const result = await response.json();
+    if (!result.ok) {
+      console.error("Select all unsuccessful");
+    }
   } else if (action === "checkout") {
-    const dataChekcout = formData.get("dataChekcout");
-    console.log(dataChekcout);
+    const dataCheckout = formData.get("dataCheckout");
+    const totalPrice = formData.get("totalPrice");
+    const cartId = formData.get("cartId");
+
+    const selectedItems = await JSON.parse(dataCheckout as string).filter(
+      (item: CartItem) => item.selected,
+    );
+
+    localStorage.setItem(
+      "checkoutItems",
+      JSON.stringify({ cartId, totalPrice, selectedItems }),
+    );
+    console.log(selectedItems, dataCheckout, "slecteditems");
+    return redirect("/checkout");
   }
 
   return redirect("/cart");
