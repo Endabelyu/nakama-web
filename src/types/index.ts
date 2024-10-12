@@ -47,6 +47,8 @@ export type CartResponse = {
 };
 export type Cart = {
   id: string;
+  allSelected: boolean;
+
   userId: string | null;
   createdAt: Date;
   updatedAt: Date;
@@ -57,6 +59,7 @@ export type Cart = {
 
 export type CartItem = {
   id: string;
+  selected: boolean;
   productId: string;
   quantity: number;
   cartId: string;
@@ -65,3 +68,16 @@ export type CartItem = {
 
   product: ProductData;
 };
+
+export interface LoginResponse {
+  ok: boolean;
+  message: string;
+  data: User;
+  token: string;
+}
+
+export interface RegisterResponse {
+  ok: boolean;
+  message: string;
+  data: User;
+}
