@@ -20,6 +20,16 @@ import { cartLoader } from "./routes/cart/cart-loader";
 import { registerAction } from "./routes/register/register-action";
 import { productDetailAction } from "./routes/product-detail/product-detail-action";
 import { cartAction } from "./routes/cart/cart-action";
+import CheckoutRoute from "./routes/checkout/checkout";
+import { checkoutLoader } from "./routes/checkout/checkout-loader";
+import { checkoutAction } from "./routes/checkout/checkout-action";
+import ProfileRoute from "./routes/profile/profile";
+import { profileLoader } from "./routes/profile/profile-loader";
+import OrderRoute from "./routes/order/order";
+import { OrderLoader } from "./routes/order/order-loader";
+import OrderDetailRoute from "./routes/order/order-detail";
+import { OrderDetailLoader } from "./routes/order-detail/order-detail-loader";
+import { profileAction } from "./routes/profile/profile-action";
 
 const router = createBrowserRouter([
   {
@@ -57,17 +67,33 @@ const router = createBrowserRouter([
         loader: loginLoader,
         action: loginAction,
       },
-      // {
-      //   path: "/dashboard",
-      //   element: <UserDashboardRoute />,
-      //   loader: userDashboardLoader,
-      //   action: userDashboardAction,
-      // },
+      {
+        path: "/profile",
+        element: <ProfileRoute />,
+        loader: profileLoader,
+        action: profileAction,
+      },
       {
         path: "/cart",
         element: <CartRoute />,
         loader: cartLoader,
         action: cartAction,
+      },
+      {
+        path: "/checkout",
+        element: <CheckoutRoute />,
+        loader: checkoutLoader,
+        action: checkoutAction,
+      },
+      {
+        path: "/order",
+        element: <OrderRoute />,
+        loader: OrderLoader,
+      },
+      {
+        path: "/order/:orderId",
+        element: <OrderDetailRoute />,
+        loader: OrderDetailLoader,
       },
     ],
   },
