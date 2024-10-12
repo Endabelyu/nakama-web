@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import { UserRegisterSchema } from "@/schemas/user";
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 
 export const registerAction = async ({ request }: ActionFunctionArgs) => {
@@ -8,10 +9,25 @@ export const registerAction = async ({ request }: ActionFunctionArgs) => {
     password: String(formData.get("password")),
     name: String(formData.get("name")),
     confirmPassword: String(formData.get("confirmPassword")),
-    address: String(formData.get("address")),
-    phone: String(formData.get("phone")),
+    address: formData.get("address")
+      ? String(formData.get("address"))
+      : undefined,
+    phone: formData.get("phone") ? String(formData.get("phone")) : undefined,
   };
+  const validationResult = UserRegisterSchema.safeParse(userRegister);
 
+  if (!validationResult.success) {
+    // Collect and return errors to the form page
+    const errors = validationResult.error.errors.reduce(
+      (acc, error) => ({
+        ...acc,
+        [error.path[0]]: error.message,
+      }),
+      {},
+    );
+    console.log(errors, "errors");
+    return { errors };
+  }
   const result = await auth.register(userRegister);
   if (result && result.ok) {
     return redirect("/login");

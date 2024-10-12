@@ -9,7 +9,6 @@ const LoginRoute = () => {
   const navigation = useNavigation();
   // No type argument for useActionData
   const actionData = useActionData() as ActionData;
-  console.log(actionData, "actionData");
   // Safely cast the actionData to the expected structure if needed
   return (
     <main className='px-8 flex justify-center items-center min-h-screen  gap-4'>
