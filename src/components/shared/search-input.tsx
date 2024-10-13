@@ -9,13 +9,7 @@ const SearchInput = ({ className }: { className?: string }) => {
     if (!location.search.includes("?")) {
       navigate(`?q=${e.target.value}`);
     } else {
-      if (location.search.includes("q")) {
-        const params = new URLSearchParams(location.search);
-        params.set("q", e.target.value);
-        navigate(`?${params.toString()}`);
-      } else {
-        navigate(`${location.search}&q=${e.target.value}`);
-      }
+      navigate(`${location.pathname}?q=${e.target.value}`);
     }
     setTimeout(() => {}, 300);
   }
