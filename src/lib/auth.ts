@@ -102,7 +102,6 @@ export const auth: Auth = {
   },
 
   logout() {
-    console.log("Logout method fired");
     accessToken.remove();
   },
 };

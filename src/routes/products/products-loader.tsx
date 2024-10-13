@@ -14,7 +14,6 @@ export const ProductsLoader = async ({ request }: { request: Request }) => {
       },
     );
     const Product = (await response.json()) as Product;
-    console.log(Product, "dats");
     return {
       products: Product.data || [],
       message: Product.message,

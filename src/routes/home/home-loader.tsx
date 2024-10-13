@@ -8,7 +8,6 @@ export const HomeLoader = async () => {
       headers: { "Content-Type": "application/json" },
     });
     const Product = (await response.json()) as Product;
-    console.log(Product, "dats");
     return {
       products: Product.data || [],
       message: Product.message,

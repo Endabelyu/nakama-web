@@ -84,7 +84,6 @@
 //     );
 
 //     localStorage.setItem("checkoutItems", JSON.stringify(selectedItems));
-//     console.log(selectedItems, dataCheckout, "slecteditems");
 //     // return redirect("/");
 //   }
 

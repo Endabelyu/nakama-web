@@ -66,7 +66,9 @@ export async function cartAction({ request }: ActionFunctionArgs) {
     }
   } else if (action === "selectItem") {
     const itemId = formData.get("itemId");
-    const selectedItems = JSON.parse(formData.get("selectedItems") as string);
+    const itemSelectName = `selectedItems-${itemId}`;
+    const selectedItems = JSON.parse(formData.get(itemSelectName) as string);
+
     const response = await fetch(
       `${BACKEND_API_URL}/carts/items/selected/${itemId}`,
       {
@@ -96,7 +98,6 @@ export async function cartAction({ request }: ActionFunctionArgs) {
       "checkoutItems",
       JSON.stringify({ cartId, totalPrice, selectedItems }),
     );
-    console.log(selectedItems, dataCheckout, "slecteditems");
     return redirect("/checkout");
   }
 

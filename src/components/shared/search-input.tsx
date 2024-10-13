@@ -6,14 +6,12 @@ const SearchInput = ({ className }: { className?: string }) => {
   const location = useLocation();
   const navigate = useNavigate();
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.value, location, "e.target.value");
     if (!location.search.includes("?")) {
       navigate(`?q=${e.target.value}`);
     } else {
       if (location.search.includes("q")) {
         const params = new URLSearchParams(location.search);
         params.set("q", e.target.value);
-        console.log(params, "params");
         navigate(`?${params.toString()}`);
       } else {
         navigate(`${location.search}&q=${e.target.value}`);

@@ -66,16 +66,17 @@ const CartRoute = () => {
                         <input type='hidden' name='itemId' value={item.id} />
                         <input
                           type='hidden'
-                          id='selectItemCheckboxValue'
-                          name='selectedItems'
+                          id={`selectItemCheckboxValue-${item.id}`}
+                          name={`selectedItems-${item.id}`}
                           value={item.selected ? "true" : "false"}
                         />
                         <Checkbox
                           checked={item.selected}
                           onCheckedChange={(e) => {
                             const checkboxState = e === true ? "true" : "false";
+                            const idSelect = `selectItemCheckboxValue-${item.id}`;
                             const hiddenInput = document.getElementById(
-                              "selectItemCheckboxValue",
+                              idSelect,
                             ) as HTMLInputElement;
                             hiddenInput.value = checkboxState;
                             const formElement = document.getElementById(

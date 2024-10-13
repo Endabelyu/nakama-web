@@ -25,7 +25,6 @@ const PaginationList: React.FC<PaginationListProps> = ({
   currentPage,
   totalPages,
 }) => {
-  console.log(currentPage, "currentPage");
   const location = useLocation();
   const startPage = 1;
   const [visiblePages, setVisiblePages] = useState<number[]>([]);
@@ -68,7 +67,6 @@ const PaginationList: React.FC<PaginationListProps> = ({
       }
 
       for (let i = start; i <= end; i++) {
-        console.log(i, "i");
         pageNumbers.push(i);
       }
 
@@ -84,13 +82,7 @@ const PaginationList: React.FC<PaginationListProps> = ({
   };
 
   const handlePageClick = (page: number) => {
-    console.log(page, "page");
     if (page > 0 && page <= totalPages) {
-      console.log(
-        location,
-        location.pathname.includes("?"),
-        "location.pathname",
-      );
       if (!location.search.includes("?")) {
         navigate(`?page=${page}`);
       } else {

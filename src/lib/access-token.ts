@@ -20,7 +20,6 @@ export const accessToken = {
     accessTokenCookie.set(COOKIE_NAME, token);
   },
   remove() {
-    console.log("Removing access token");
     accessTokenCookie.remove(COOKIE_NAME);
   },
 };

@@ -1,5 +1,5 @@
 import { BACKEND_API_URL } from "@/lib/env";
-import {  ProductDetail } from "@/types";
+import { ProductDetail } from "@/types";
 import { LoaderFunctionArgs } from "react-router-dom";
 
 export const ProductLoader = async ({ params }: LoaderFunctionArgs) => {
@@ -11,7 +11,6 @@ export const ProductLoader = async ({ params }: LoaderFunctionArgs) => {
       headers: { "Content-Type": "application/json" },
     });
     const Product = (await response.json()) as ProductDetail;
-    console.log(Product, "dats");
     return {
       products: Product.data,
       message: Product.message,

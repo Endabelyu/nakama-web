@@ -1,7 +1,6 @@
 import { auth } from "@/lib/auth";
 import { BACKEND_API_URL } from "@/lib/env";
 import { Toast } from "@/lib/toast";
-import { CartItem } from "@/types";
 import { ActionFunctionArgs, redirect } from "react-router-dom";
 
 export async function checkoutAction({ request }: ActionFunctionArgs) {

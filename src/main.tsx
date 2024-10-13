@@ -27,10 +27,10 @@ import ProfileRoute from "./routes/profile/profile";
 import { profileLoader } from "./routes/profile/profile-loader";
 import OrderRoute from "./routes/order/order";
 import { OrderLoader } from "./routes/order/order-loader";
-import OrderDetailRoute from "./routes/order/order-detail";
 import { OrderDetailLoader } from "./routes/order-detail/order-detail-loader";
 import { profileAction } from "./routes/profile/profile-action";
 import OrderSuccessRoute from "./routes/order/order-scucess";
+import OrderDetailRoute from "./routes/order-detail/order-detail";
 
 const router = createBrowserRouter([
   {

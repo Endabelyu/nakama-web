@@ -24,13 +24,11 @@ export const registerAction = async ({ request }: ActionFunctionArgs) => {
       }),
       {},
     );
-    console.log(errors, "errors");
     return { errors };
   }
   const result = await auth.register(userRegister);
   if (result && result.ok) {
     return redirect("/login");
   }
-  console.log(result, "result");
   if (!result) return null;
 };
