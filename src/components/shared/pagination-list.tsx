@@ -31,7 +31,7 @@ const PaginationList: React.FC<PaginationListProps> = ({
   const navigate = useNavigate();
   useEffect(() => {
     setVisiblePages(getPageNumbers(currentPage));
-  }, [currentPage]);
+  }, [currentPage, totalPages]);
 
   const getPageNumbers = (current: number) => {
     const pageNumbers: number[] = [];
