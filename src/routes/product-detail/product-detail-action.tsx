@@ -6,7 +6,7 @@ import { ActionFunctionArgs, redirect } from "react-router-dom";
 
 export async function productDetailAction({ request }: ActionFunctionArgs) {
   const token = auth.getToken();
-  if (!token) return null;
+  if (!token) return redirect("/login");
 
   const formData = await request.formData();
 
