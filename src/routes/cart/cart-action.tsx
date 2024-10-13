@@ -49,7 +49,7 @@ export async function cartAction({ request }: ActionFunctionArgs) {
     const cartId = formData.get("cartId");
     const allSelected = JSON.parse(formData.get("allSelected") as string);
     const response = await fetch(
-      `${BACKEND_API_URL}/carts/items/selected/${cartId}`,
+      `${BACKEND_API_URL}/carts/items/selectedAll/${cartId}`,
       {
         method: "PUT",
         headers: {
